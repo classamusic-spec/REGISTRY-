@@ -64,7 +64,8 @@ export default function Home() {
           <li>
             <b>2</b>
             <span>
-              Tap <strong>Purchase</strong> — it opens on Walmart in a new tab.
+              Tap <strong>Purchase</strong> — it opens on Walmart in a new tab. (Prices are from Walmart and may
+              change.)
             </span>
           </li>
           <li>

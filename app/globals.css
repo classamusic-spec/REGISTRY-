@@ -698,6 +698,12 @@ a {
   text-decoration-style: dashed;
 }
 
+.card-price {
+  margin: -4px 0 8px;
+  font-size: 19px;
+  color: var(--brown);
+}
+
 .card-amount {
   margin: -4px 0 8px;
   font-size: 15px;

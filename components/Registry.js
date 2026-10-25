@@ -231,6 +231,7 @@ function Card({ item, taken, count, isMine, onPurchase, onUndo }) {
             {item.title || item.name}
           </a>
         </h3>
+        {item.price && !item.amount ? <p className="card-price">{item.price}</p> : null}
         {item.amount ? (
           <p className="card-amount">
             <strong>{item.amount}</strong>

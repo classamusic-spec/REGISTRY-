@@ -43,6 +43,11 @@ export async function POST(req) {
       if (typeof v.title === "string" && v.title.trim()) e.title = v.title.trim().slice(0, 200);
       if (typeof v.image === "string" && /^https:\/\//.test(v.image)) e.image = v.image.slice(0, 1000);
       else if (v.image === "") e.image = ""; // host cleared a wrong photo
+      if (typeof v.price === "string") {
+        const n = Number(v.price.replace(/[$,\s]/g, ""));
+        if (v.price.trim() === "") e.price = ""; // cleared
+        else if (Number.isFinite(n) && n > 0 && n < 100000) e.price = "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      }
       if (Object.keys(e).length) entries[id] = e;
     }
     return NextResponse.json({ ok: true, saved: await saveMeta(entries) });
