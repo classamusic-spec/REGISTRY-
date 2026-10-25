@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { canSave, getLog, getState, hasDatabase, releaseItem, resetAll, saveMeta } from "../../../lib/store";
+import { canSave, claimItem, countItem, getLog, getState, hasDatabase, releaseItem, resetAll, saveMeta } from "../../../lib/store";
 import { itemsById } from "../../../lib/registry";
 
 export const dynamic = "force-dynamic";
@@ -22,6 +22,17 @@ export async function POST(req) {
   if (!authorized(key)) return NextResponse.json({ error: "Wrong key" }, { status: 401 });
   if (!canSave) return NextResponse.json({ error: "Connect Upstash Redis first" }, { status: 503 });
   const body = await req.json().catch(() => ({}));
+  if (body.action === "claim") {
+    // The host marks a gift as bought, e.g. a guest who forgot to tap "Yes, I bought it".
+    const item = itemsById[body.id];
+    if (!item) return NextResponse.json({ error: "Unknown item" }, { status: 404 });
+    const clean = (s, max) => String(s || "").trim().slice(0, max);
+    const record = { name: clean(body.name, 80), note: clean(body.note, 300), at: new Date().toISOString(), byHost: true };
+    if (item.multi) return NextResponse.json({ ok: true, count: await countItem(item.id, record) });
+    const ok = await claimItem(item.id, record);
+    if (!ok) return NextResponse.json({ error: "Already marked as purchased" }, { status: 409 });
+    return NextResponse.json({ ok: true });
+  }
   if (body.action === "release" && body.id) await releaseItem(String(body.id));
   else if (body.action === "reset" && body.confirm === "RESET") await resetAll();
   else if (body.action === "meta" && body.entries && typeof body.entries === "object") {

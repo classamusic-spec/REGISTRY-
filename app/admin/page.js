@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import data from "../../data/registry.json";
 import { ImportPreview, PhotoManager, matchImport, readImportFromHash } from "../../components/PhotoTools";
+import MarkPurchased from "../../components/MarkPurchased";
 
 const byId = Object.fromEntries(data.items.map((i) => [i.id, i]));
 const KEY = "hunny-registry:admin";
@@ -51,6 +52,17 @@ export default function Admin() {
       body: JSON.stringify(body),
     });
     await load();
+    return res.ok;
+  }
+
+  async function markPurchased({ id, name, note }) {
+    const res = await fetch("/api/admin", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "x-admin-key": key },
+      body: JSON.stringify({ action: "claim", id, name, note }),
+    });
+    await load();
+    if (!res.ok) alert((await res.json().catch(() => ({}))).error || "Couldn't save — please try again.");
     return res.ok;
   }
 
@@ -119,7 +131,10 @@ export default function Admin() {
                             {state.meta?.[id]?.title || byId[id]?.name || id}
                           </a>
                         </td>
-                        <td>{c.name || "—"}</td>
+                        <td>
+                          {c.name || "—"}
+                          {c.byHost ? <small className="hint"> (marked by host)</small> : null}
+                        </td>
                         <td>{c.note || ""}</td>
                         <td>{new Date(c.at).toLocaleString()}</td>
                         <td>
@@ -135,6 +150,8 @@ export default function Admin() {
                 </tbody>
               </table>
             </div>
+
+            <MarkPurchased claims={state.claims} meta={state.meta || {}} counts={state.counts || {}} onMark={markPurchased} />
 
             <h2>Everything guests reported (incl. diapers, wipes & gift cards)</h2>
             <div className="table-wrap">

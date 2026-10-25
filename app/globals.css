@@ -1028,3 +1028,87 @@ a {
   font-size: 11px;
   color: var(--brown-soft);
 }
+
+.mark-filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.admin .mark-filters input {
+  flex: 1;
+}
+
+.mark-filters select {
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  padding: 6px 10px;
+  background: #fff;
+  font-size: 15px;
+}
+
+.mark-list {
+  max-height: 460px;
+  overflow-y: auto;
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+}
+
+.mark-row {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.mark-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.mark-item > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.mark-item a {
+  font-size: 14px;
+  color: var(--brown-soft);
+}
+
+.mark-item img,
+.mark-item .noimg {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  background: var(--cream-deep);
+  border-radius: 8px;
+}
+
+.mark-item .btn {
+  flex: none;
+  font-size: 15px;
+  padding: 6px 12px;
+}
+
+.mark-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin: 8px 0 4px 60px;
+}
+
+.admin .mark-form input {
+  flex: 1 1 180px;
+  width: auto;
+}
+
+@media (max-width: 560px) {
+  .mark-form {
+    margin-left: 0;
+  }
+}
