@@ -777,7 +777,8 @@
       "name": "Walmart",
       "url": "https://www.walmart.com/ip/20110064941",
       "image": "",
-      "multi": true
+      "multi": true,
+      "amount": "You choose the amount"
     },
     {
       "id": "5089154044",
@@ -785,7 +786,8 @@
       "name": "A treat for you (food)",
       "url": "https://www.walmart.com/ip/5089154044",
       "image": "",
-      "multi": true
+      "multi": true,
+      "amount": "$25"
     },
     {
       "id": "5144555043",
@@ -793,7 +795,8 @@
       "name": "A treat for you (food)",
       "url": "https://www.walmart.com/ip/5144555043",
       "image": "",
-      "multi": true
+      "multi": true,
+      "amount": "$50"
     },
     {
       "id": "2043841942",
@@ -801,7 +804,8 @@
       "name": "Food & Drinks",
       "url": "https://www.walmart.com/ip/2043841942",
       "image": "",
-      "multi": true
+      "multi": true,
+      "amount": "$50"
     },
     {
       "id": "2828945027",
@@ -809,7 +813,8 @@
       "name": "Eats & Sweets",
       "url": "https://www.walmart.com/ip/2828945027",
       "image": "",
-      "multi": true
+      "multi": true,
+      "amount": "$25"
     },
     {
       "id": "2383993249",
@@ -817,7 +822,8 @@
       "name": "It\u2019s a date",
       "url": "https://www.walmart.com/ip/2383993249",
       "image": "",
-      "multi": true
+      "multi": true,
+      "amount": "$25"
     },
     {
       "id": "1711228460",
@@ -825,7 +831,8 @@
       "name": "It\u2019s a date",
       "url": "https://www.walmart.com/ip/1711228460",
       "image": "",
-      "multi": true
+      "multi": true,
+      "amount": "$50"
     },
     {
       "id": "16674308765",
@@ -833,7 +840,9 @@
       "name": "Mastercard",
       "url": "https://www.walmart.com/ip/16674308765",
       "image": "",
-      "multi": true
+      "multi": true,
+      "amount": "$20\u2013$500",
+      "amountNote": "you choose, + $6.84 Walmart fee"
     },
     {
       "id": "16679068507",
@@ -841,7 +850,9 @@
       "name": "Visa",
       "url": "https://www.walmart.com/ip/16679068507",
       "image": "",
-      "multi": true
+      "multi": true,
+      "amount": "$20\u2013$500",
+      "amountNote": "you choose, + $6.84 Walmart fee"
     }
   ]
 }

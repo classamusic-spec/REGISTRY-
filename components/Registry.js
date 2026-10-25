@@ -204,11 +204,17 @@ export default function Registry({ items: baseItems, categories }) {
   );
 }
 
+// Gift cards show their value in the corner; a range or open amount reads "Any amount".
+function badgeText(item) {
+  if (item.category !== "Gift Cards") return "Stock up!";
+  return item.amount && /^\$\d+$/.test(item.amount) ? item.amount : "Any amount";
+}
+
 function Card({ item, taken, count, isMine, onPurchase, onUndo }) {
   return (
     <article className={`card${taken ? " is-taken" : ""}`}>
       {taken ? <div className="stamp">Purchased</div> : null}
-      {item.multi && !taken ? <div className="badge">{item.category === "Gift Cards" ? "Any amount" : "Stock up!"}</div> : null}
+      {item.multi && !taken ? <div className="badge">{badgeText(item)}</div> : null}
 
       <div className={`card-media${item.image ? "" : " placeholder"}`}>
         {item.image ? (
@@ -225,6 +231,12 @@ function Card({ item, taken, count, isMine, onPurchase, onUndo }) {
             {item.title || item.name}
           </a>
         </h3>
+        {item.amount ? (
+          <p className="card-amount">
+            <strong>{item.amount}</strong>
+            {item.amountNote ? <span> · {item.amountNote}</span> : null}
+          </p>
+        ) : null}
         {item.multi && count > 0 ? (
           <p className="card-meta">
             {count} {count === 1 ? "guest has" : "guests have"} sent one 💛
