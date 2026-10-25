@@ -194,6 +194,59 @@ a {
   font-size: 24px;
 }
 
+/* ───── Welcome letter ───── */
+
+.welcome {
+  position: relative;
+  max-width: 760px;
+  margin: 26px auto 8px;
+  padding: 30px 34px 26px;
+  text-align: center;
+  background: var(--paper);
+  border-radius: var(--radius);
+  border: 1.5px solid #dbe7ee;
+  box-shadow: 0 0 0 6px rgba(220, 234, 242, 0.55), var(--shadow);
+}
+
+.welcome h2 {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(28px, 4.6vw, 38px);
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  margin: 0 0 14px;
+}
+
+.welcome p {
+  margin: 0 0 12px;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.welcome .signoff {
+  margin: 18px 0 0;
+  color: var(--brown-soft);
+}
+
+.welcome .signoff span {
+  display: block;
+  font-family: var(--font-script), cursive;
+  font-size: 48px;
+  line-height: 1;
+  color: var(--brown);
+  margin-top: 4px;
+}
+
+@media (max-width: 700px) {
+  .welcome {
+    margin: 18px 14px 8px;
+    padding: 24px 20px 20px;
+  }
+  .welcome p {
+    font-size: 18px;
+  }
+}
+
 /* ───── Intro / how it works ───── */
 
 .intro {

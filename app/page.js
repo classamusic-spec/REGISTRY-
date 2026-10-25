@@ -26,6 +26,26 @@ export default function Home() {
         </div>
       </header>
 
+      <section className="welcome" aria-labelledby="welcome-title">
+        <h2 id="welcome-title">💙 Our Family Is Growing! 💙</h2>
+        <p>
+          Our hearts are growing, and our family is getting a little bigger! We’re so excited to welcome our second baby
+          boy and feel incredibly blessed to experience this beautiful chapter of our lives again. 👶🏻🩵
+        </p>
+        <p>
+          Thank you for being part of our journey and for showering our growing family with so much love. Whether you’re
+          here to help us prepare for our newest little blessing or simply celebrate with us, we’re so grateful to have
+          you in our lives.
+        </p>
+        <p>
+          Thank you for helping us welcome our sweet baby boy into the world. We can’t wait for you to meet him! 🍼💙
+        </p>
+        <p className="signoff">
+          With love,
+          <span>Our Growing Family 🤍</span>
+        </p>
+      </section>
+
       <section className="intro">
         <ol className="steps">
           <li>
