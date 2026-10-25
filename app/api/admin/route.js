@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getLog, getState, hasDatabase, releaseItem, resetAll, saveMeta } from "../../../lib/store";
+import { canSave, getLog, getState, hasDatabase, releaseItem, resetAll, saveMeta } from "../../../lib/store";
 import { itemsById } from "../../../lib/registry";
 
 export const dynamic = "force-dynamic";
@@ -20,6 +20,7 @@ export async function GET(req) {
 export async function POST(req) {
   const key = req.headers.get("x-admin-key");
   if (!authorized(key)) return NextResponse.json({ error: "Wrong key" }, { status: 401 });
+  if (!canSave) return NextResponse.json({ error: "Connect Upstash Redis first" }, { status: 503 });
   const body = await req.json().catch(() => ({}));
   if (body.action === "release" && body.id) await releaseItem(String(body.id));
   else if (body.action === "reset" && body.confirm === "RESET") await resetAll();

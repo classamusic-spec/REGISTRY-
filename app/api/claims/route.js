@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { claimItem, countItem, getClaim, getState, releaseItem } from "../../../lib/store";
+import { canSave, claimItem, countItem, getClaim, getState, releaseItem } from "../../../lib/store";
 import { itemsById } from "../../../lib/registry";
 
 export const dynamic = "force-dynamic";
@@ -15,6 +15,9 @@ export async function GET() {
 }
 
 export async function POST(req) {
+  if (!canSave) {
+    return NextResponse.json({ error: "The registry is still being set up — please try again a little later." }, { status: 503 });
+  }
   const body = await req.json().catch(() => ({}));
   const item = itemsById[body.id];
   if (!item) return NextResponse.json({ error: "Unknown item" }, { status: 404 });

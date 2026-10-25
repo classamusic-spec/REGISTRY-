@@ -57,6 +57,7 @@ export default function Admin() {
   async function savePhotos(entries) {
     const ok = await act({ action: "meta", entries });
     if (ok) setPending(null);
+    else alert("Couldn't save. Is the Upstash Redis database connected in Vercel?");
   }
 
   return (
