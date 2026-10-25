@@ -7,7 +7,10 @@ export default function Home() {
   return (
     <main className="sheet">
       <header className="hero">
-        <img className="hero-branch" src="/art/branch-hive.webp" alt="" width="1100" height="1037" fetchPriority="high" />
+        <div className="hero-branch" aria-hidden="true">
+          <img src="/art/branch.webp" alt="" width="1100" height="1037" fetchPriority="high" />
+          <img className="branch-bees" src="/art/bees-branch.webp" alt="" width="505" height="476" />
+        </div>
         <img className="hero-bees" src="/art/bees.webp" alt="" width="520" height="480" />
         <Balloon className="hero-balloon" />
         <img className="hero-pot" src="/art/honey-pot.webp" alt="" width="480" height="567" />
