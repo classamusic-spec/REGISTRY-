@@ -8,7 +8,9 @@ const walmartItems = data.items.filter((i) => !i.linkBroken);
 
 // Runs on walmart.com in the host's own browser (Walmart blocks servers and bots,
 // but not a person). It collects product ids, titles and photos from the page and
-// opens /admin with them in the URL hash for review.
+// opens /admin with them in the URL hash for review. When looking for a product
+// link's photo it never climbs into a container that holds other products, so a
+// tile without its own image can't borrow a neighbour's.
 function bookmarkletSource(origin) {
   const fn = `(()=>{
 const S=${JSON.stringify(origin)};const out={};
@@ -18,7 +20,8 @@ const add=(id,t,i)=>{if(!id)return;const o=out[id]||(out[id]={});if(t&&!o.title)
 const page=idOf(location.href);
 if(page){const og=n=>{const m=document.querySelector('meta[property="og:'+n+'"]');return m&&m.content};const h=document.querySelector('h1');const im=document.querySelector('[data-testid*="hero"] img,img[src*="walmartimages.com/seo"]');add(page,(h&&h.innerText)||og('title'),og('image')||(im&&im.src))}
 const alts={};
-document.querySelectorAll('a[href*="/ip/"]').forEach(a=>{const id=idOf(a.href);if(!id||id===page)return;let c=a,img=null;for(let k=0;k<5&&c&&!img;k++){img=c.querySelector&&c.querySelector('img[src*="walmartimages"]');c=c.parentElement}if(img&&img.alt&&!alts[id])alts[id]=img.alt;add(id,(a.innerText||'').trim(),img&&img.src)});
+const others=(el,id)=>{for(const l of el.querySelectorAll('a[href*="/ip/"]')){const j=idOf(l.href);if(j&&j!==id)return true}return false};
+document.querySelectorAll('a[href*="/ip/"]').forEach(a=>{const id=idOf(a.href);if(!id||id===page)return;let c=a,img=null;for(let k=0;k<5&&c&&!img;k++){if(k>0&&others(c,id))break;img=c.querySelector&&c.querySelector('img[src*="walmartimages"]');c=c.parentElement}if(img&&img.alt&&!alts[id])alts[id]=img.alt;add(id,(a.innerText||'').trim(),img&&img.src)});
 for(const id in alts)add(id,alts[id]);
 const r=location.hash.match(/reg=([\\w-]+)/);
 const w=window.open(S+'/admin#import='+encodeURIComponent(JSON.stringify({page:page,reg:r&&r[1],items:out})),'hunnyregistry');

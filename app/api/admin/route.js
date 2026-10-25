@@ -42,6 +42,7 @@ export async function POST(req) {
       const e = {};
       if (typeof v.title === "string" && v.title.trim()) e.title = v.title.trim().slice(0, 200);
       if (typeof v.image === "string" && /^https:\/\//.test(v.image)) e.image = v.image.slice(0, 1000);
+      else if (v.image === "") e.image = ""; // host cleared a wrong photo
       if (Object.keys(e).length) entries[id] = e;
     }
     return NextResponse.json({ ok: true, saved: await saveMeta(entries) });
