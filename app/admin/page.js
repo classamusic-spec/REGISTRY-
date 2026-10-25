@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import data from "../../data/registry.json";
+import { ImportPreview, PhotoManager, matchImport, readImportFromHash } from "../../components/PhotoTools";
 
 const byId = Object.fromEntries(data.items.map((i) => [i.id, i]));
 const KEY = "hunny-registry:admin";
@@ -10,6 +11,7 @@ export default function Admin() {
   const [key, setKey] = useState("");
   const [state, setState] = useState(null);
   const [error, setError] = useState(null);
+  const [pending, setPending] = useState(null); // photos found by the bookmarklet, awaiting review
 
   async function load(k = key) {
     setError(null);
@@ -20,15 +22,20 @@ export default function Admin() {
       return;
     }
     try {
-      sessionStorage.setItem(KEY, k);
+      localStorage.setItem(KEY, k);
     } catch {}
     setState(await res.json());
   }
 
   useEffect(() => {
+    const payload = readImportFromHash();
+    if (payload) {
+      setPending(matchImport(payload));
+      history.replaceState(null, "", location.pathname);
+    }
     let saved = "";
     try {
-      saved = sessionStorage.getItem(KEY) || "";
+      saved = localStorage.getItem(KEY) || "";
     } catch {}
     if (saved) {
       setKey(saved);
@@ -38,12 +45,18 @@ export default function Admin() {
   }, []);
 
   async function act(body) {
-    await fetch("/api/admin", {
+    const res = await fetch("/api/admin", {
       method: "POST",
       headers: { "Content-Type": "application/json", "x-admin-key": key },
       body: JSON.stringify(body),
     });
-    load();
+    await load();
+    return res.ok;
+  }
+
+  async function savePhotos(entries) {
+    const ok = await act({ action: "meta", entries });
+    if (ok) setPending(null);
   }
 
   return (
@@ -52,6 +65,8 @@ export default function Admin() {
         <h1 className="title" style={{ fontSize: 72, textAlign: "center" }}>
           host view
         </h1>
+
+        {pending && !state ? <p style={{ textAlign: "center" }}>Enter your admin key to review the photos you just grabbed.</p> : null}
 
         {!state ? (
           <form
@@ -79,6 +94,8 @@ export default function Admin() {
               </p>
             ) : null}
 
+            {pending ? <ImportPreview entries={pending} onSave={savePhotos} onDiscard={() => setPending(null)} /> : null}
+
             <h2>Purchased items ({Object.keys(state.claims).length})</h2>
             <div className="table-wrap">
               <table>
@@ -98,7 +115,7 @@ export default function Admin() {
                       <tr key={id}>
                         <td>
                           <a href={byId[id]?.url} target="_blank" rel="noopener noreferrer">
-                            {byId[id]?.title || byId[id]?.name || id}
+                            {state.meta?.[id]?.title || byId[id]?.name || id}
                           </a>
                         </td>
                         <td>{c.name || "—"}</td>
@@ -132,7 +149,7 @@ export default function Admin() {
                 <tbody>
                   {[...state.log].reverse().map((row, i) => (
                     <tr key={i}>
-                      <td>{byId[row.id]?.title || byId[row.id]?.name || row.id}</td>
+                      <td>{state.meta?.[row.id]?.title || byId[row.id]?.name || row.id}</td>
                       <td>{row.name || "—"}</td>
                       <td>{row.note || ""}</td>
                       <td>{new Date(row.at).toLocaleString()}</td>
@@ -141,6 +158,8 @@ export default function Admin() {
                 </tbody>
               </table>
             </div>
+
+            <PhotoManager meta={state.meta || {}} onSave={savePhotos} />
 
             <p style={{ marginTop: 30, textAlign: "center" }}>
               <button

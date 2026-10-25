@@ -838,3 +838,72 @@ a {
 .admin .table-wrap {
   overflow-x: auto;
 }
+
+.admin h2 {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 600;
+  font-size: 26px;
+  margin: 34px 0 12px;
+}
+
+.admin input:not([type="checkbox"]) {
+  width: 100%;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  padding: 6px 10px;
+  background: #fff;
+  font-size: 15px;
+  margin: 2px 0;
+}
+
+.admin .howto {
+  display: grid;
+  gap: 10px;
+  padding-left: 22px;
+}
+
+.admin .hint {
+  color: var(--brown-soft);
+  font-size: 16px;
+}
+
+.bookmarklet {
+  cursor: grab;
+  padding: 6px 16px;
+}
+
+.import {
+  background: var(--paper);
+  border: 2px dashed var(--honey);
+  border-radius: var(--radius);
+  padding: 4px 18px 8px;
+  margin-top: 20px;
+}
+
+.import-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 10px;
+}
+
+.import-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 15px;
+  line-height: 1.25;
+}
+
+.import-row img,
+.import-row .noimg {
+  flex: none;
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  color: var(--brown-soft);
+}

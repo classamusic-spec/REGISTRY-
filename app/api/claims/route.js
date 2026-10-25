@@ -9,9 +9,9 @@ const clean = (s, max) => String(s || "").trim().slice(0, max);
 
 // Public view: which items are taken, never who bought them.
 export async function GET() {
-  const { claims, counts } = await getState();
+  const { claims, counts, meta } = await getState();
   const taken = Object.fromEntries(Object.entries(claims).map(([id, c]) => [id, { at: c.at }]));
-  return NextResponse.json({ taken, counts }, { headers: noStore });
+  return NextResponse.json({ taken, counts, meta }, { headers: noStore });
 }
 
 export async function POST(req) {

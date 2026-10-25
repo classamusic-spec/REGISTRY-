@@ -20,7 +20,8 @@ function saveTokens(tokens) {
   } catch {}
 }
 
-export default function Registry({ items, categories }) {
+export default function Registry({ items: baseItems, categories }) {
+  const [meta, setMeta] = useState({}); // product photos/titles the host imported
   const [taken, setTaken] = useState({});
   const [counts, setCounts] = useState({});
   const [mine, setMine] = useState({});
@@ -37,6 +38,7 @@ export default function Registry({ items, categories }) {
       const data = await res.json();
       setTaken(data.taken || {});
       setCounts(data.counts || {});
+      setMeta(data.meta || {});
       setLoaded(true);
     } catch {}
   }, []);
@@ -61,6 +63,7 @@ export default function Registry({ items, categories }) {
     return () => clearTimeout(t);
   }, [toast]);
 
+  const items = useMemo(() => baseItems.map((i) => (meta[i.id] ? { ...i, ...meta[i.id] } : i)), [baseItems, meta]);
   const claimable = items.filter((i) => !i.multi);
   const purchasedCount = claimable.filter((i) => taken[i.id]).length;
 
