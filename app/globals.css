@@ -81,6 +81,7 @@ a {
   width: min(400px, 58vw);
   height: auto;
   pointer-events: none;
+  transform: scaleX(-1); /* mirrored: branch grows in from the left edge */
 }
 
 .hero-bees {
