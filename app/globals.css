@@ -66,6 +66,48 @@ a {
   }
 }
 
+/* ───── Back to the Canva invitation ───── */
+
+.back-link {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 3; /* above the branch artwork */
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px 7px 12px;
+  border-radius: 999px;
+  background: rgba(255, 253, 245, 0.92);
+  border: 1.5px solid var(--line);
+  box-shadow: var(--shadow);
+  color: var(--brown);
+  font-size: 17px;
+  text-decoration: none;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.back-link:hover {
+  background: var(--honey-light);
+  transform: translateX(-2px);
+}
+
+.back-link:focus-visible {
+  outline: 3px solid var(--honey);
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .back-link {
+    top: 10px;
+    left: 10px;
+    font-size: 15px;
+    padding: 6px 12px 6px 10px;
+  }
+}
+
 /* ───── Hero ───── */
 
 .hero {

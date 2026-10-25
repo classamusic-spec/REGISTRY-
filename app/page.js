@@ -6,6 +6,12 @@ import { config } from "../lib/config";
 export default function Home() {
   return (
     <main className="sheet">
+      {config.invitationUrl ? (
+        <a className="back-link" href={config.invitationUrl}>
+          <span aria-hidden="true">←</span> Back to invitation
+        </a>
+      ) : null}
+
       <header className="hero">
         <div className="hero-branch" aria-hidden="true">
           <img src="/art/branch.webp" alt="" width="1100" height="1037" fetchPriority="high" />
