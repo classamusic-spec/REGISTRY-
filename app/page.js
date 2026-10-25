@@ -1,5 +1,5 @@
 import Registry from "../components/Registry";
-import { Balloon, BeeTrail, BranchWithHive, Cloud, HoneyPot } from "../components/Art";
+import { Balloon, Cloud } from "../components/Art";
 import { categories, items } from "../lib/registry";
 import { config } from "../lib/config";
 
@@ -7,10 +7,10 @@ export default function Home() {
   return (
     <main className="sheet">
       <header className="hero">
-        <BranchWithHive className="hero-branch" />
-        <BeeTrail className="hero-bees" />
+        <img className="hero-branch" src="/art/branch-hive.webp" alt="" width="1100" height="1037" fetchPriority="high" />
+        <img className="hero-bees" src="/art/bees.webp" alt="" width="520" height="480" />
         <Balloon className="hero-balloon" />
-        <HoneyPot className="hero-pot" />
+        <img className="hero-pot" src="/art/honey-pot.webp" alt="" width="480" height="567" />
 
         <p className="eyebrow">a sweet</p>
         <h1 className="title">little hunny</h1>
@@ -81,6 +81,7 @@ export default function Home() {
       <Registry items={items} categories={categories} />
 
       <footer className="footer">
+        <img className="footer-pot" src="/art/honey-pot.webp" alt="" width="480" height="567" loading="lazy" />
         <div className="script">thank you</div>
         <p>for helping us welcome our little hunny 🍯</p>
       </footer>

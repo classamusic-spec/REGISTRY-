@@ -71,40 +71,51 @@ a {
 .hero {
   position: relative;
   text-align: center;
-  padding: 120px 20px 28px;
+  padding: 130px 20px 28px;
 }
 
 .hero-branch {
   position: absolute;
-  top: -6px;
-  left: -10px;
-  width: min(420px, 62vw);
+  top: -18px;
+  left: -14px;
+  width: min(400px, 58vw);
+  height: auto;
   pointer-events: none;
 }
 
 .hero-bees {
   position: absolute;
-  top: 40px;
-  right: 0;
-  width: min(300px, 40vw);
+  top: 26px;
+  right: 18px;
+  width: min(240px, 34vw);
+  height: auto;
   pointer-events: none;
 }
 
 .hero-balloon {
   position: absolute;
-  right: 6%;
-  top: 170px;
-  width: 92px;
+  right: 7%;
+  top: 250px;
+  width: 84px;
   animation: float 6s ease-in-out infinite;
   pointer-events: none;
 }
 
 .hero-pot {
   position: absolute;
-  left: 5%;
-  bottom: 4px;
-  width: 120px;
+  left: 6%;
+  bottom: 0;
+  width: 118px;
+  height: auto;
   pointer-events: none;
+  transform: rotate(-6deg);
+}
+
+.footer-pot {
+  display: block;
+  width: 84px;
+  height: auto;
+  margin: 0 auto 6px;
 }
 
 @keyframes float {
@@ -115,7 +126,7 @@ a {
 
 @media (max-width: 700px) {
   .hero {
-    padding-top: 168px;
+    padding-top: 196px;
   }
 }
 

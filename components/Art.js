@@ -1,9 +1,9 @@
-// Hand-drawn style SVG pieces inspired by the invitation: tree branch, beehive,
-// buzzing bees, a honey pot, a balloon and the scalloped "RSVP" cloud.
+// Small SVG pieces in the invitation's style: a bee, a balloon, the scalloped
+// "RSVP" cloud and category icons. The branch, hive and honey pot are the
+// invitation's own artwork in public/art.
 
 const BROWN = "#6E4A1F";
 const HONEY = "#E9B451";
-const HONEY_LIGHT = "#F6D488";
 
 export function Bee({ x = 0, y = 0, scale = 1, flip = false }) {
   return (
@@ -15,48 +15,6 @@ export function Bee({ x = 0, y = 0, scale = 1, flip = false }) {
       <circle cx="8" cy="-1" r="1.1" fill={BROWN} />
       <path d="M-10 0 l-4 1" stroke={BROWN} strokeWidth="1.4" />
     </g>
-  );
-}
-
-export function BranchWithHive(props) {
-  return (
-    <svg viewBox="0 0 420 300" aria-hidden="true" {...props}>
-      {/* leaves */}
-      <g opacity=".95">
-        <path d="M10 20 C30 -10 120 -10 170 10 C220 0 280 10 300 40 C320 70 290 100 250 96 C230 120 170 120 140 104 C110 120 50 116 30 92 C0 84 -10 50 10 20Z" fill="#A9BC84" />
-        <path d="M40 30 C70 10 130 14 160 30 C200 18 250 26 270 50 C250 78 200 80 170 72 C130 90 80 86 50 70 C30 60 26 44 40 30Z" fill="#8FA56C" opacity=".75" />
-        <path d="M70 40 C100 30 140 34 160 46 C180 40 220 44 236 56 C210 66 180 64 160 60 C130 70 96 66 74 56Z" fill="#7C935A" opacity=".55" />
-        <g stroke="#55683A" strokeWidth="2" strokeLinecap="round" fill="none" opacity=".7">
-          <path d="M60 36 l14 8 M90 22 l10 12 M130 30 l6 14 M180 26 l-4 14 M220 36 l-10 10 M250 54 l-14 4 M110 62 l12 -6 M150 74 l8 -10 M200 70 l-6 -10 M70 70 l12 -4 M40 56 l14 0" />
-        </g>
-      </g>
-      {/* branch */}
-      <path d="M150 96 C190 110 230 112 262 126 C292 140 330 150 360 182 L352 190 C324 164 292 156 262 146 C228 134 196 124 160 112Z" fill="#8A5A34" stroke={BROWN} strokeWidth="2" strokeLinejoin="round" />
-      <path d="M262 132 C258 112 266 100 280 90 L286 96 C274 106 270 118 272 134Z" fill="#8A5A34" stroke={BROWN} strokeWidth="2" />
-      {/* string */}
-      <path d="M300 150 Q302 175 300 196" stroke="#9AA3A8" strokeWidth="2" fill="none" />
-      {/* hive */}
-      <g transform="translate(300 196)" stroke={BROWN} strokeWidth="2">
-        <ellipse cx="0" cy="8" rx="16" ry="9" fill={HONEY_LIGHT} />
-        <ellipse cx="0" cy="22" rx="28" ry="11" fill={HONEY} />
-        <ellipse cx="0" cy="38" rx="36" ry="12" fill={HONEY_LIGHT} />
-        <ellipse cx="0" cy="55" rx="38" ry="12" fill={HONEY} />
-        <ellipse cx="0" cy="71" rx="32" ry="11" fill={HONEY_LIGHT} />
-        <ellipse cx="0" cy="85" rx="20" ry="8" fill={HONEY} />
-        <ellipse cx="-4" cy="46" rx="7" ry="8" fill="#3A2810" />
-      </g>
-    </svg>
-  );
-}
-
-export function BeeTrail(props) {
-  return (
-    <svg viewBox="0 0 300 200" aria-hidden="true" {...props}>
-      <path d="M20 150 C60 110 90 170 120 130 C150 90 110 70 140 60 C180 46 200 100 240 70" stroke={BROWN} strokeWidth="1.5" strokeDasharray="5 6" fill="none" opacity=".6" />
-      <Bee x={258} y={60} scale={1.4} />
-      <path d="M60 40 C90 20 120 50 150 30" stroke={BROWN} strokeWidth="1.5" strokeDasharray="5 6" fill="none" opacity=".6" />
-      <Bee x={46} y={46} scale={1} flip />
-    </svg>
   );
 }
 
@@ -74,19 +32,6 @@ export function Balloon(props) {
       <path d="M50 4 C78 4 94 28 94 54 C94 82 70 104 50 108 C30 104 6 82 6 54 C6 28 22 4 50 4Z" fill="url(#bal)" stroke="#C99A55" strokeWidth="1.5" />
       <path d="M44 108 l6 8 l6 -8Z" fill="#EDB765" />
       <ellipse cx="32" cy="34" rx="8" ry="13" fill="#fff" opacity=".45" transform="rotate(20 32 34)" />
-    </svg>
-  );
-}
-
-export function HoneyPot(props) {
-  return (
-    <svg viewBox="0 0 140 130" aria-hidden="true" {...props}>
-      <ellipse cx="70" cy="120" rx="60" ry="8" fill={HONEY} opacity=".55" />
-      <path d="M30 40 C14 60 14 100 36 116 C56 126 86 126 104 116 C126 100 126 60 110 40Z" fill="#9B6A3C" stroke={BROWN} strokeWidth="2.5" />
-      <path d="M26 30 h88 a6 6 0 0 1 0 14 h-88 a6 6 0 0 1 0 -14Z" fill="#B07A47" stroke={BROWN} strokeWidth="2.5" />
-      <path d="M30 58 h80 v26 h-80Z" fill="#A9C7BE" stroke={BROWN} strokeWidth="2" opacity=".95" />
-      <path d="M36 32 C40 18 60 14 70 22 C80 12 102 18 104 32 C100 40 96 50 98 62 C94 70 88 66 88 56 C88 46 80 44 76 52 C72 60 64 58 64 48 C62 40 50 40 50 50 C50 56 42 58 40 50 C38 44 36 40 36 32Z" fill={HONEY} stroke={BROWN} strokeWidth="2" />
-      <text x="70" y="77" textAnchor="middle" fontSize="13" fill={BROWN} fontFamily="var(--font-hand), sans-serif">HUNNY</text>
     </svg>
   );
 }
