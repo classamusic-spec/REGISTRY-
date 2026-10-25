@@ -1,0 +1,69 @@
+import Registry from "../components/Registry";
+import { Balloon, BeeTrail, BranchWithHive, Cloud, HoneyPot } from "../components/Art";
+import { categories, items } from "../lib/registry";
+import { config } from "../lib/config";
+
+export default function Home() {
+  return (
+    <main className="sheet">
+      <header className="hero">
+        <BranchWithHive className="hero-branch" />
+        <BeeTrail className="hero-bees" />
+        <Balloon className="hero-balloon" />
+        <HoneyPot className="hero-pot" />
+
+        <p className="eyebrow">a sweet</p>
+        <h1 className="title">little hunny</h1>
+        <p className="subtitle">is on the way</p>
+
+        <p className="honoring">baby shower registry for mom-to-be</p>
+        <p className="mom">{config.momName}</p>
+
+        <div className="date-row" aria-label={`${config.dateLabel} at ${config.timeLabel}`}>
+          <span className="rule">{config.month}</span>
+          <span className="day">{config.day}</span>
+          <span className="rule">{config.timeLabel.replace(" ", "")}</span>
+        </div>
+      </header>
+
+      <section className="intro">
+        <ol className="steps">
+          <li>
+            <b>1</b>
+            <span>Pick a gift you love below.</span>
+          </li>
+          <li>
+            <b>2</b>
+            <span>
+              Tap <strong>Purchase</strong> — it opens on Walmart in a new tab.
+            </span>
+          </li>
+          <li>
+            <b>3</b>
+            <span>
+              Come back and tap <strong>Yes, I bought it</strong> so it greys out and nobody doubles up.
+            </span>
+          </li>
+        </ol>
+        {config.invitationUrl ? (
+          <a className="cloud" href={config.invitationUrl} target="_blank" rel="noopener">
+            <Cloud />
+            <span>
+              the
+              <br />
+              invitation
+              <small>click here</small>
+            </span>
+          </a>
+        ) : null}
+      </section>
+
+      <Registry items={items} categories={categories} />
+
+      <footer className="footer">
+        <div className="script">thank you</div>
+        <p>for helping us welcome our little hunny 🍯</p>
+      </footer>
+    </main>
+  );
+}
